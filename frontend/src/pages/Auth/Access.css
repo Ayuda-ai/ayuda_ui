@@ -1,0 +1,50 @@
+.accessCode {
+    text-align: center;
+    height: 50px;
+    font-size: 75%;
+    background-color: #343a48;
+    color: #f16d2c;
+    box-shadow: 0 0 0 #fff;
+    border-radius: 2%;
+    border-color: #fff;
+    margin-bottom: 10px;
+}
+
+.accessCodeSubmit {
+    color: #fff;
+    font-size: 20px;
+    width: 135px;
+    height: 60px;
+    border: none;
+    margin: 20px;
+    padding: 0;
+    background-color: #FFDE8B;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.redirection-link {
+    font-size: small;
+    text-decoration: underline;
+    color: #fff;
+}
+
+.signup {
+    border: 2px solid #fff;
+    border-radius: 20px;
+    padding: 50px 40px 50px 40px;
+}
+
+.user-note {
+    font-size: 15px;
+    text-align: center;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.hr-tag {
+    border: 0;
+    height: 0.5px;
+    background: white; /* White color for the <hr> */
+    margin: 10px 0;
+}
