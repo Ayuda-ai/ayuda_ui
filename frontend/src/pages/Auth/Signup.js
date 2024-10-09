@@ -8,6 +8,7 @@ import { registerUser } from "../../api/AuthRequests.js";
 const Signup = () => {
   const [emailId, setEmailId] = useState("");
   const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleEmailAddressChange = (e) => {
@@ -16,6 +17,12 @@ const Signup = () => {
   const handleUserNameChange = (e) => {
     setUserName(e.target.value);
   };
+
+  const handlePasswordChange = (e) => {
+    // hash the pwd
+    let pwd = e.target.value;
+    setPassword(pwd);    // change it to the hash
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
@@ -90,6 +97,17 @@ const Signup = () => {
           placeholder="Email"
           value={emailId}
           onChange={handleEmailAddressChange}
+        />
+        <br />
+        <input
+          className="accessCode"
+          type="password"
+          id="text"
+          name="email"
+          size="20"
+          placeholder="Password"
+          value={password}
+          onChange={handlePasswordChange}
         />
         <br />
         <input
