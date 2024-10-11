@@ -20,12 +20,12 @@ const UserProfile = () => {
   // function to append skills from the search bar
   const addSkills = (newSkills) => {
     setSkills((prevSkills) => [...prevSkills, newSkills]);
-  }
+  };
 
   // function to append career paths from the search bar
   const addDomains = (newDomain) => {
     setDomains((prevDomains) => [...prevDomains, newDomain]);
-  }
+  };
 
   const removeSkill = (skillToRemove) => {
     setSkills(skills.filter((skill) => skill !== skillToRemove));
@@ -44,11 +44,15 @@ const UserProfile = () => {
   };
 
   const saveUser = () => {
+    if (!user || !user.email) {
+      console.error("User or user email is not defined.");
+      return;
+    }
     // Save user profile using PATCH method
     // The updated user must take skills and domains array and update them in the DB
-    updateUserById(user.email, skills, domains);
+    updateUserById(user.email, skills || [], domains || []);
     showPopup();
-  }
+  };
 
   useEffect(() => {
     async function fetchUserData() {
@@ -57,11 +61,13 @@ const UserProfile = () => {
         try {
           const userData = await getUserByEmailId(userEmail);
           setUser(userData.data);
-          setSkills(userData.data.skills);
-          setDomains(userData.data.career_path);
+          setSkills(userData.data.skills || []);
+          setDomains(userData.data.career_path || []);
         } catch (error) {
           console.error("Failed to fetch user data:", error);
           setUser(undefined);
+          setSkills([]); // Reset skills to an empty array on error
+          setDomains([]); // Reset domains to an empty array on error
         }
       } else {
         console.log("No user email found in session storage.");
@@ -99,12 +105,16 @@ const UserProfile = () => {
                 ))
               : " No skills to show"}
           </div>
-        </ul><br />
+        </ul>
+        <br />
 
-        <DomainsSearchBar placeholder="Enter career paths..." addDomains={addDomains} />
+        <DomainsSearchBar
+          placeholder="Enter career paths..."
+          addDomains={addDomains}
+        />
         <ul>
-            {/* TODO: Make skills editable - add/remove */}
-        <div className="skills-container">
+          {/* TODO: Make skills editable - add/remove */}
+          <div className="skills-container">
             Future Career Paths:
             {user && domains.length > 0
               ? domains.map((domain, index) => (
@@ -121,13 +131,9 @@ const UserProfile = () => {
                 ))
               : " No Career Path Set"}
           </div>
-          </ul>
-          <Button buttonText="Save Profile" onClick={saveUser} />
-          {
-            isPopupVisible && (
-              <UserUpdatePopup closePopup={closePopup} />
-            )
-          }
+        </ul>
+        <Button buttonText="Save Profile" onClick={saveUser} />
+        {isPopupVisible && <UserUpdatePopup closePopup={closePopup} />}
       </div>
     </div>
   );
