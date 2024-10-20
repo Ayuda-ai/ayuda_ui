@@ -41,8 +41,8 @@ export const Dashboard = () => {
       {!loading && Object.keys(recommendData).length > 0 && (
         <div>
           {recommendData.map((item, index) => (
-            <div   class="card" key={index}>
-              <div class="card-body">{JSON.stringify(item.course_id).replace(/['"]+/g, '')}: {JSON.stringify(item.course_name).replace(/['"]+/g, '')}</div>
+            <div className="card" key={index}>
+              <div className="card-body">{JSON.stringify(item.course_id).replace(/['"]+/g, '')}: {JSON.stringify(item.course_name).replace(/['"]+/g, '')}</div>
             </div>
           ))}
         </div>

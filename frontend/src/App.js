@@ -32,7 +32,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Router>
-          <Navbar isAuthenticated={isAuthenticated} />
+          <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
             <Routes>
             <Route path='/' element={
                 <>

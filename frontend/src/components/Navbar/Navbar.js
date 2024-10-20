@@ -2,12 +2,17 @@ import React from 'react';
 import './Navbar.css';
 import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = ({ isAuthenticated }) => {
+const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
   const navigate = useNavigate();
+
   const handleLogout = async () => {
-    navigate('/');
-    // remove user from session and redirect to /
+    // remove user from session, update the state in App and redirect to /
     sessionStorage.removeItem('user');
+    console.log('Removed user from storage');
+    setIsAuthenticated(false);
+    console.log('updated isAuth flag');
+    navigate('/');
+    console.log('navigated to /');
   };
 
   return (

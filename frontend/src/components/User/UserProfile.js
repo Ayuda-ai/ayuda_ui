@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { loadUserFromSessionStorage } from "../../utils/SessionHandler.js";
 import { getUserByEmailId, updateUserById } from "../../api/UserRequests.js";
 import "./UserProfile.css";
@@ -10,6 +10,7 @@ import { DomainsSearchBar } from "../Search/DomainsSearchBar.js";
 
 const UserProfile = () => {
   const location = useLocation();
+  const navigate = useNavigate();  // Add navigate for redirection if needed
   const [user, setUser] = useState(null); // Directly store user object
 
   const [skills, setSkills] = useState([]);
@@ -56,7 +57,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     async function fetchUserData() {
-      const userEmail = loadUserFromSessionStorage()["email"];
+      const userEmail = loadUserFromSessionStorage()?.email; // Safe chaining
       if (userEmail) {
         try {
           const userData = await getUserByEmailId(userEmail);
@@ -71,12 +72,17 @@ const UserProfile = () => {
         }
       } else {
         console.log("No user email found in session storage.");
-        setUser(undefined);
+        setUser(null); // Set user to null if not found in session storage
+        navigate("/");  // Redirect to login if no user is found
       }
     }
 
     fetchUserData(); // Call the function to execute the operations
-  }, [location]);
+  }, [location, navigate]);
+
+  if (!user) {
+    return <div>Loading user profile or user not logged in.</div>;
+  }
 
   return (
     <div className="dashboard-div">
