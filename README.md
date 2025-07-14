@@ -118,6 +118,7 @@ ayuda_ui/
 
 ### Authentication Flow
 ```mermaid
+graph TD
     A[User Login] --> B[POST /auth/login]
     B --> C[JWT Token Generated]
     C --> D[Token Stored in Session]
@@ -126,6 +127,7 @@ ayuda_ui/
 
 ### Resume Upload Workflow
 ```mermaid
+graph TD
     A[Upload Resume] --> B[POST /users/resume]
     B --> C[Text Extraction]
     C --> D[Embedding Generation]
@@ -135,6 +137,7 @@ ayuda_ui/
 
 ### Course Recommendation Flow
 ```mermaid
+graph TD
     A[Get Recommendations] --> B[GET /recommendations/match_courses]
     B --> C[Semantic Search]
     C --> D[Keyword Matching]
@@ -146,6 +149,7 @@ ayuda_ui/
 
 ### Profile Management Flow
 ```mermaid
+graph TD
     A[Add Completed Course] --> B[POST /users/profile/completed-courses]
     B --> C[Course Added to Profile]
     C --> D[Refresh Course List]
@@ -261,6 +265,7 @@ Ensure the following backend services are running:
 ### Component Communication
 
 ```mermaid
+graph TD
     A[App.jsx] --> B[AuthContext]
     A --> C[Router]
     C --> D[Dashboard]
@@ -347,6 +352,7 @@ Ensure the following backend services are running:
 
 ### Data Flow
 ```mermaid
+graph TD
     A[User Action] --> B[Component State]
     B --> C[API Service]
     C --> D[Backend API]
